@@ -49,7 +49,7 @@
         /**
          * Request games owned by given player.
          * @name requestOwnedGames
-         * @param {Object} steamID The player's steam ID
+         * @param {String} steamID The player's steam ID
          * @param {function} success The success callback
          * @param {function} error The error callback
          * @function
@@ -88,7 +88,12 @@
          */
         function checkPlayerMock(steamID, success, error) {
 
-            success({personaname: 'adrael_boy', personastate: 1});
+            setTimeout(
+                function () {
+                    success({personaname: 'adrael_boy', personastate: 1});
+                },
+                1000
+            );
 
         }
 

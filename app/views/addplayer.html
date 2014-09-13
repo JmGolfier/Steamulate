@@ -12,11 +12,17 @@
             </div>
         </div>
 
+        <div class="notice marker-on-bottom bg-darkRed" ng-show="addplayer.playerAlreadyExists">
+            <div class="fg-white">
+                Oops.. {{addplayer.player.personaname}} is already registered!
+            </div>
+        </div>
+
         <br>
 
         <form class="col-md-6">
             <div class="input-control text" data-role="input-control">
-                <input type="text" placeholder="Player's SteamID">
+                <input type="text" placeholder="Player's SteamID" ng-model="addplayer.steamID" autofocus autocomplete>
             </div>
 
             <br>
@@ -28,10 +34,15 @@
                 <small>All unsaved changes will be lost</small>
             </button>
 
-            <button class="command-button success" ng-click="addplayer.checkPlayer()">
+            <button class="command-button success" ng-click="addplayer.checkPlayer()" ng-class="{disabled: !addplayer.isSteamIDOkToSubmit()}" ng-hide="addplayer.requesting">
                 <i class="icon-checkmark on-right"></i>
                 Save player
                 <small>Register player to the pool</small>
+            </button>
+
+            <button class="command-button success disabled" ng-show="addplayer.requesting">
+                <img src="images/ajax-loader.gif" width="40">
+                Verifying player...
             </button>
         </form>
 

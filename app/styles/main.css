@@ -35,3 +35,9 @@ body {
     width: 360px;
     height: 50px;
 }
+
+*.disabled {
+    pointer-events: none;
+    cursor: default !important;
+    opacity: .5 !important;
+}

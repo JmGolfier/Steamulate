@@ -22,24 +22,26 @@
         .controller('AddPlayer', AddPlayer);
 
     // Dependency injection
-    AddPlayer.$inject = ['$log', 'AddPlayerLogic'];
+    AddPlayer.$inject = ['$log', '$scope', 'AddPlayerLogic'];
 
     /**
      * The AddPlayer controller aims to manage the AddPlayer view.
      * @name AddPlayer
      * @param {Object} $log The AngularJS's $log object
+     * @param {Object} $scope The AngularJS's $scope object
      * @param {Object} AddPlayerLogic The AddPlayer controller's logic file
      * @function
      */
-    function AddPlayer($log, AddPlayerLogic) {
+    function AddPlayer($log, $scope, AddPlayerLogic) {
 
         $log.debug('Loading AddPlayer Controller...');
 
         var vm = this;
 
-        vm.steamID = null;
-        vm.checkPlayer = checkPlayer;
         vm.goBack = goBack;
+        vm.checkPlayer = checkPlayer;
+        vm.applyChanges = applyChanges;
+        vm.isSteamIDOkToSubmit = isSteamIDOkToSubmit;
 
         return vm;
 
@@ -59,6 +61,25 @@
          */
         function goBack() {
             AddPlayerLogic.goBack();
+        }
+
+        /**
+         * Check if the steamID field is set or not
+         * @name isSteamIDOkToSubmit
+         * @return {Boolean} The fact that the steamID is correctly set or not
+         * @function
+         */
+        function isSteamIDOkToSubmit() {
+            return vm.steamID && vm.steamID !== '';
+        }
+
+        /**
+         * Apply scope changes
+         * @name applyChanges
+         * @function
+         */
+        function applyChanges() {
+            $scope.$apply();
         }
 
     }

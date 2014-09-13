@@ -22,17 +22,18 @@
         .service('AddPlayerLogic', AddPlayerLogic);
 
     // Dependency injection
-    AddPlayerLogic.$inject = ['$location', 'Server'];
+    AddPlayerLogic.$inject = ['$location', 'Server', 'Pool'];
 
     /**
      * The Server factory manage the server requests.
      * @name Server
      * @param {Object} $location The $location handler object
      * @param {Object} Server The Server handler object
+     * @param {Object} Pool The Pool handler object
      * @return {Object} The factory
      * @function
      */
-    function AddPlayerLogic($location, Server) {
+    function AddPlayerLogic($location, Server, Pool) {
 
         var factory =
         {
@@ -49,17 +50,41 @@
          * @function
          */
         function checkPlayer(scope) {
-            function validPlayer(data) {
-                console.info('Player verified:', data);
-                scope.validPlayer = true;
-                scope.player = data;
+
+            scope.playerAlreadyExists = false;
+
+            console.log(Pool.hasPlayer(scope.steamID));
+
+            if (!Pool.hasPlayer(scope.steamID)) {
+
+                scope.requesting = true;
+
+                var validPlayer = function (data) {
+                    console.info('Player verified:', data);
+                    scope.requesting = false;
+                    scope.validPlayer = true;
+                    scope.player = data;
+                    Pool.addPlayer(scope.steamID, data);
+                    scope.applyChanges();
+                };
+
+                var invalidPlayer = function (data) {
+                    console.error('Invalid player:', data);
+                    scope.validPlayer = false;
+                    scope.requesting = false;
+                    scope.applyChanges();
+                };
+
+                Server.checkPlayerMock(scope.steamID, validPlayer, invalidPlayer);
+
+            } else {
+
+                scope.validPlayer = false;
+                scope.playerAlreadyExists = true;
+                scope.player = Pool.getPlayer(scope.steamID);
+
             }
 
-            function invalidPlayer(data) {
-                console.error('Invalid player:', data);
-            }
-
-            Server.checkPlayerMock(scope.steamID, validPlayer, invalidPlayer);
         }
 
         /**
