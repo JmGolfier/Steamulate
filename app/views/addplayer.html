@@ -1,0 +1,40 @@
+<div class="container">
+
+    <div class="text-center">
+
+        <h1>Add a player to the pool</h1>
+
+        <br>
+
+        <div class="notice marker-on-bottom bg-green" ng-show="addplayer.validPlayer">
+            <div class="fg-white">
+                Congrats! {{addplayer.player.personaname}} has been successfully added to the pool!
+            </div>
+        </div>
+
+        <br>
+
+        <form class="col-md-6">
+            <div class="input-control text" data-role="input-control">
+                <input type="text" placeholder="Player's SteamID">
+            </div>
+
+            <br>
+            <br>
+
+            <button class="command-button warning" ng-click="addplayer.goBack()">
+                <i class="icon-arrow-left on-left"></i>
+                Go back
+                <small>All unsaved changes will be lost</small>
+            </button>
+
+            <button class="command-button success" ng-click="addplayer.checkPlayer()">
+                <i class="icon-checkmark on-right"></i>
+                Save player
+                <small>Register player to the pool</small>
+            </button>
+        </form>
+
+    </div>
+
+</div>
