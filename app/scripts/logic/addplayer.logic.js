@@ -22,18 +22,18 @@
         .service('AddPlayerLogic', AddPlayerLogic);
 
     // Dependency injection
-    AddPlayerLogic.$inject = ['$location', 'Server', 'Pool'];
+    AddPlayerLogic.$inject = ['$window', 'Server', 'Pool'];
 
     /**
      * The Server factory manage the server requests.
      * @name Server
-     * @param {Object} $location The $location handler object
+     * @param {Object} $window The $window handler object
      * @param {Object} Server The Server handler object
      * @param {Object} Pool The Pool handler object
      * @return {Object} The factory
      * @function
      */
-    function AddPlayerLogic($location, Server, Pool) {
+    function AddPlayerLogic($window, Server, Pool) {
 
         var factory =
         {
@@ -94,7 +94,7 @@
          */
         function goBack() {
 
-            $location.path('/');
+            $window.history.back();
 
         }
 
