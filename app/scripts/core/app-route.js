@@ -49,6 +49,14 @@
 
             })
 
+            .when('/reviewplayers', {
+
+                templateUrl: 'views/reviewplayers.html',
+                controller: 'ReviewPlayers',
+                controllerAs: 'reviewplayers'
+
+            })
+
             .otherwise({
                 redirectTo: '/'
             });

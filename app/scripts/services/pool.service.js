@@ -8,7 +8,7 @@
  */
 
 /**
- * Server IIFE declaration.
+ * Pool IIFE declaration.
  * @name IIFE
  * @function
  */
@@ -32,7 +32,8 @@
 
         var factory =
         {
-            players: {},
+            players: new Map(),
+            clear: clear,
             getPlayer: getPlayer,
             addPlayer: addPlayer,
             hasPlayer: hasPlayer,
@@ -50,7 +51,7 @@
          */
         function removePlayer(steamID) {
 
-            delete factory.players[steamID];
+            factory.players.delete(steamID);
 
         }
 
@@ -63,7 +64,7 @@
          */
         function addPlayer(steamID, player) {
 
-            factory.players[steamID] = player;
+            factory.players.set(steamID, player);
 
         }
 
@@ -79,14 +80,14 @@
         }
 
         /**
-         * Return the choosen player if it exists.
+         * Return the chosen player if it exists.
          * @name getPlayer
          * @param {String} steamID The player's steam ID
          * @function
          */
         function getPlayer(steamID) {
 
-            return factory.players[steamID];
+            return factory.players.get(steamID);
 
         }
 
@@ -98,9 +99,18 @@
          */
         function hasPlayer(steamID) {
 
-            return factory.players[steamID] !== undefined&&
-                factory.players[steamID] !== null &&
-                typeof factory.players[steamID] === 'object';
+            return factory.players.has(steamID);
+
+        }
+
+        /**
+         * Reset the pool.
+         * @name clear
+         * @function
+         */
+        function clear() {
+
+            factory.players.clear();
 
         }
 

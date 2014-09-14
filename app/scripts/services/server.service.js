@@ -90,7 +90,14 @@
 
             setTimeout(
                 function () {
-                    success({personaname: 'adrael_boy', personastate: 1});
+                    success(
+                        {
+                            steamid: steamID,
+                            personaname: 'adrael_boy',
+                            personastate: 1,
+                            avatarmedium: 'http://goo.gl/Wf1vws'
+                        }
+                    );
                 },
                 1000
             );
@@ -142,7 +149,6 @@
          */
         function reset() {
 
-            factory.data = null;
             factory.error = null;
             factory.success = null;
 

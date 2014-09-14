@@ -41,3 +41,12 @@ body {
     cursor: default !important;
     opacity: .5 !important;
 }
+
+.table-review-players * {
+    color: #000000 !important;
+}
+
+.notice a {
+    text-decoration: underline;
+    font-style: italic;
+}

@@ -1,0 +1,64 @@
+<div class="container">
+
+    <div class="text-center">
+
+        <h1>Review registered players</h1>
+
+        <br>
+
+        <div class="notice marker-on-top bg-darkRed" ng-show="reviewplayers.players.length <= 0">
+            <div class="fg-white">
+                There is no player registered yet. Head to the <a href="#/addplayer">Add player page</a> to start adding
+                players!
+            </div>
+        </div>
+
+        <table class="table striped bordered hovered table-review-players" ng-show="reviewplayers.players.length > 0">
+            <thead>
+            <tr>
+                <th class="text-left">Avatar</th>
+                <th class="text-left">SteamID</th>
+                <th class="text-left">Name</th>
+                <th class="text-left">State</th>
+                <th class="text-left">Actions</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr class="" ng-repeat="player in reviewplayers.players">
+                <td class="right"><img ng-src="{{player.avatarmedium}}" class="rounded"
+                                       style="border: 1px solid #333333" width="64"></td>
+                <td ng-bind="player.steamid"></td>
+                <td class="right" ng-bind="player.personaname"></td>
+                <td class="right" ng-bind="player.stateLabel"></td>
+                <td class="right">
+                    <button class="shortcut danger" ng-click="reviewplayers.removePlayer(player.steamid)">
+                        <i class="icon-remove fg-white"></i>
+                        Remove
+                    </button>
+                    <button class="shortcut primary">
+                        <i class="icon-stats fg-white"></i>
+                        View stats
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <br>
+
+        <button class="command-button warning" ng-click="reviewplayers.goBack()">
+            <i class="icon-arrow-left on-left"></i>
+            Go back
+            <small>Add players, Steamulate, and other cool stuff</small>
+        </button>
+
+        <button class="command-button inverse">
+            <i class="icon-play on-right"></i>
+            Steamulate now!
+            <small>Select a game amongst all the libraries</small>
+        </button>
+
+    </div>
+
+</div>

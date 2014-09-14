@@ -25,7 +25,7 @@
     AddPlayerLogic.$inject = ['$window', 'Server', 'Pool'];
 
     /**
-     * The Server factory manage the server requests.
+     * The AddPlayerLogic manage the AddPlayer controller.
      * @name Server
      * @param {Object} $window The $window handler object
      * @param {Object} Server The Server handler object
@@ -52,8 +52,6 @@
         function checkPlayer(scope) {
 
             scope.playerAlreadyExists = false;
-
-            console.log(Pool.hasPlayer(scope.steamID));
 
             if (!Pool.hasPlayer(scope.steamID)) {
 
@@ -88,7 +86,7 @@
         }
 
         /**
-         * Change the view to Home.
+         * Change the view to previous page.
          * @name goBack
          * @function
          */

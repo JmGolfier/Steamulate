@@ -6,6 +6,10 @@
 
         <br>
 
+        <h4 ng-bind="main.getRegisteredPlayersLabel()"></h4>
+
+        <br>
+
         <button class="command-button info" ng-click="main.goToAddPlayer()">
             <i class="icon-user-2 on-right"></i>
             Add a player to the pool
@@ -15,7 +19,7 @@
         <br>
         <br>
 
-        <button class="command-button success">
+        <button class="command-button success" ng-click="main.goToReviewPlayers()">
             <i class="icon-share-3 on-right"></i>
             Review players already in the pool
             <small>Players management made easy</small>
@@ -33,7 +37,7 @@
         <br>
         <br>
 
-        <button class="command-button danger">
+        <button class="command-button danger" ng-click="main.reset()">
             <i class="icon-remove on-right"></i>
             Erase everything
             <small>Removes all players and start from scratch</small>
