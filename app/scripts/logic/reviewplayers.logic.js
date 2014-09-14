@@ -94,7 +94,6 @@
         function removePlayer(steamID) {
 
             Pool.removePlayer(steamID);
-            return factory.getPlayers();
 
         }
 

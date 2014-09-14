@@ -62,7 +62,8 @@
          */
         function removePlayer(steamID) {
 
-            vm.players = ReviewPlayersLogic.removePlayer(steamID);
+            ReviewPlayersLogic.removePlayer(steamID);
+            vm.players = ReviewPlayersLogic.getPlayers();
 
         }
 
