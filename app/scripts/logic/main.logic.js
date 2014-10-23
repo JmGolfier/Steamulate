@@ -48,7 +48,7 @@
          * @function
          */
         function getRegisteredPlayersLabel() {
-            var numberOfPlayers = Pool.getPlayers().size;
+            var numberOfPlayers = Pool.getPlayers().length;
 
             if(numberOfPlayers > 1) {
 

@@ -38,9 +38,14 @@
 
         var vm = this;
 
+        vm.steamID = '76561198019819113';
+
+        // Damien  : 76561198017678310
+        // Raphael : 76561198019819113
+        // Test    : 76561197960435530
+
         vm.goBack = goBack;
         vm.checkPlayer = checkPlayer;
-        vm.applyChanges = applyChanges;
         vm.isSteamIDOkToSubmit = isSteamIDOkToSubmit;
 
         return vm;
@@ -71,15 +76,6 @@
          */
         function isSteamIDOkToSubmit() {
             return vm.steamID && vm.steamID !== '';
-        }
-
-        /**
-         * Apply scope changes
-         * @name applyChanges
-         * @function
-         */
-        function applyChanges() {
-            $scope.$apply();
         }
 
     }

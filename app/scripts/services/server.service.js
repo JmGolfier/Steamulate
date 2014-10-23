@@ -35,13 +35,10 @@
 
         var factory =
         {
-            error: null,
-            success: null,
             requestOwnedGames: requestOwnedGames,
             requestOwnedGamesMock: requestOwnedGamesMock,
-            checkPlayerMock: checkPlayerMock,
-            baseURL: 'http://api.steampowered.com/IPlayerService/',
-            key: 'XXXXXXXXXXXXXXXXX'
+            checkPlayer: checkPlayer,
+            baseURL: 'http://localhost:8080/'
         };
 
         return factory;
@@ -56,12 +53,10 @@
          */
         function requestOwnedGames(steamID, success, error) {
 
-            factory.error = error;
-            factory.success = success;
-
-            return $http.get(factory.baseURL + 'GetOwnedGames/v0001', {steamid: steamID, key: factory.key})
-                .then(requestSuccess)
-                .catch(requestError);
+            return $http.get(factory.baseURL + 'GetPlayerSummaries/v0002?format=json&steamid=' +
+            steamID +'&key=' + factory.key)
+                .then(success)
+                .catch(error);
 
         }
 
@@ -86,71 +81,14 @@
          * @param {Function} error The error callback
          * @function
          */
-        function checkPlayerMock(steamID, success, error) {
+        function checkPlayer(steamID, success, error) {
 
-            setTimeout(
-                function () {
-                    success(
-                        {
-                            steamid: steamID,
-                            personaname: 'adrael_boy',
-                            personastate: 1,
-                            avatarmedium: 'http://goo.gl/Wf1vws'
-                        }
-                    );
-                },
-                1000
-            );
+            factory.error = error;
+            factory.success = success;
 
-        }
-
-        /**
-         * Request data to server.
-         * @name requestSuccess
-         * @param {Object} response The request's response object
-         * @function
-         */
-        function requestSuccess(response) {
-
-            console.info('Request success:', factory.data.service, response.data.result);
-
-            if (response.data.result.errorId !== 0) {
-
-                console.error('Error #' + response.data.result.errorId + ':', response.data.result.errorText);
-
-            } else {
-
-                factory.success(response.data.result);
-
-            }
-
-            reset();
-
-        }
-
-        /**
-         * Callback for failed requests.
-         * @name requestError
-         * @param {Object} error The request's error object
-         * @function
-         */
-        function requestError(error) {
-
-            console.error('Request failed: ' + factory.data.service + ' - ' + error.message);
-            factory.error(error);
-            reset();
-
-        }
-
-        /**
-         * Reset the server data.
-         * @name reset
-         * @function
-         */
-        function reset() {
-
-            factory.error = null;
-            factory.success = null;
+            return $http.get(factory.baseURL + 'user/' + steamID)
+                .then(success)
+                .catch(error);
 
         }
 

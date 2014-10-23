@@ -32,7 +32,7 @@
 
         var factory =
         {
-            players: new Map(),
+            players: [],
             clear: clear,
             getPlayer: getPlayer,
             addPlayer: addPlayer,
@@ -51,7 +51,13 @@
          */
         function removePlayer(steamID) {
 
-            factory.players.delete(steamID);
+            var player = $.grep(factory.players,
+                function (player) {
+                    return player.steamID === steamID;
+                }
+            )[0];
+
+            factory.players.splice($.inArray(player, factory.players), 1);
 
         }
 
@@ -64,7 +70,8 @@
          */
         function addPlayer(steamID, player) {
 
-            factory.players.set(steamID, player);
+            player.steamID = steamID;
+            factory.players.push(player);
 
         }
 
@@ -87,7 +94,11 @@
          */
         function getPlayer(steamID) {
 
-            return factory.players.get(steamID);
+            return $.grep(factory.players,
+                function (player) {
+                    return player.steamID === steamID;
+                }
+            )[0];
 
         }
 
@@ -99,7 +110,11 @@
          */
         function hasPlayer(steamID) {
 
-            return factory.players.has(steamID);
+            return $.grep(factory.players,
+                function (player) {
+                    return player.steamID === steamID;
+                }
+            ).length > 0;
 
         }
 
@@ -110,7 +125,7 @@
          */
         function clear() {
 
-            factory.players.clear();
+            factory.players = [];
 
         }
 

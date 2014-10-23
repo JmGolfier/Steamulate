@@ -58,22 +58,20 @@
                 scope.requesting = true;
 
                 var validPlayer = function (data) {
-                    console.info('Player verified:', data);
+                    console.info('Player verified:', data.data);
                     scope.requesting = false;
                     scope.validPlayer = true;
-                    scope.player = data;
-                    Pool.addPlayer(scope.steamID, data);
-                    scope.applyChanges();
+                    scope.player = data.data;
+                    Pool.addPlayer(scope.steamID, data.data);
                 };
 
                 var invalidPlayer = function (data) {
                     console.error('Invalid player:', data);
                     scope.validPlayer = false;
                     scope.requesting = false;
-                    scope.applyChanges();
                 };
 
-                Server.checkPlayerMock(scope.steamID, validPlayer, invalidPlayer);
+                Server.checkPlayer(scope.steamID, validPlayer, invalidPlayer);
 
             } else {
 

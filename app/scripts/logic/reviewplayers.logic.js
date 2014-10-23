@@ -73,7 +73,7 @@
                 6: 'Looking to play'
             };
 
-            var players = Pool.getPlayers().values();
+            var players = Pool.getPlayers();
 
             for(var i = 0; i < players.length; ++i) {
 
