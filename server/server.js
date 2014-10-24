@@ -35,6 +35,8 @@
 
     // GET Handlers
     vm.server.get('/user/:id', getUser);
+    vm.server.get('/games/:id', getGamesForUser);
+    vm.server.get('/stats/:id/:game', getStatsForGameOfUser);
 
     vm.server.listen(8080, serverListening);
 
@@ -71,6 +73,85 @@
                 }
 
                 resS.send(200, obj.response.players[0]);
+
+            }
+
+        );
+
+        return next();
+    }
+
+    /**
+     * Get a user's games list from Steam.
+     * @name getGamesForUser
+     * @param {Object} reqS The request object
+     * @param {Object} resS The response object
+     * @param {Object} next The iterator for the next request
+     * @function
+     */
+    function getGamesForUser(reqS, resS, next) {
+
+        vm.client.get(
+
+            vm.client.url.href + 'IPlayerService/GetOwnedGames/v0001?key=' + vm.KEY + '&steamid=' + reqS.params.id,
+
+            function (err, reqC, resC, obj) {
+
+                if(err) {
+
+                    resS.send(
+                        err.statusCode,
+
+                        {
+                            message: err.message
+                        }
+                    );
+
+                    return;
+
+                }
+
+                resS.send(200, obj.response);
+
+            }
+
+        );
+
+        return next();
+    }
+
+    /**
+     * Get the user's given game stats from Steam.
+     * @name getStatsForGameOfUser
+     * @param {Object} reqS The request object
+     * @param {Object} resS The response object
+     * @param {Object} next The iterator for the next request
+     * @function
+     */
+    function getStatsForGameOfUser(reqS, resS, next) {
+
+        vm.client.get(
+
+            vm.client.url.href + 'ISteamUserStats/GetUserStatsForGame/v0002?key=' + vm.KEY +
+            '&steamid=' + reqS.params.id + '&appid=' + reqS.params.game,
+
+            function (err, reqC, resC, obj) {
+
+                if(err) {
+
+                    resS.send(
+                        err.statusCode,
+
+                        {
+                            message: err.message
+                        }
+                    );
+
+                    return;
+
+                }
+
+                resS.send(200, obj);
 
             }
 

@@ -22,17 +22,16 @@
         .controller('AddPlayer', AddPlayer);
 
     // Dependency injection
-    AddPlayer.$inject = ['$log', '$scope', 'AddPlayerLogic'];
+    AddPlayer.$inject = ['$log', 'AddPlayerLogic'];
 
     /**
      * The AddPlayer controller aims to manage the AddPlayer view.
      * @name AddPlayer
      * @param {Object} $log The AngularJS's $log object
-     * @param {Object} $scope The AngularJS's $scope object
      * @param {Object} AddPlayerLogic The AddPlayer controller's logic file
      * @function
      */
-    function AddPlayer($log, $scope, AddPlayerLogic) {
+    function AddPlayer($log, AddPlayerLogic) {
 
         $log.debug('Loading AddPlayer Controller...');
 
